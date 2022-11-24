@@ -7,9 +7,9 @@
     tools:context=".InfoActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:background="#7FD2C8"
         android:orientation="horizontal"
         android:weightSum="12"
@@ -24,7 +24,6 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_weight="1"
             android:background="#7FD3C9"
             android:contentDescription="Back to chats"
             android:paddingTop="24dp"
@@ -36,7 +35,6 @@
             android:id="@+id/textViewChats"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="О приложении"
             android:textColor="#FFFFFF"
@@ -51,7 +49,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <LinearLayout
             android:layout_width="match_parent"
