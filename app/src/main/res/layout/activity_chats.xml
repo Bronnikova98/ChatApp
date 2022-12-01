@@ -140,7 +140,7 @@
             app:srcCompat="@drawable/daylogo" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/signout"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
