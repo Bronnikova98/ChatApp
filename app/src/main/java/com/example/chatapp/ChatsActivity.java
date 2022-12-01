@@ -25,6 +25,7 @@ public class ChatsActivity extends AppCompatActivity {
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
     ImageButton signOutBtn;
+    ImageButton addChatBtn;
 
 
 
@@ -34,6 +35,7 @@ public class ChatsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chats);
 
         signOutBtn = findViewById(R.id.signout);
+        addChatBtn = findViewById(R.id.addchat);
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(ChatsActivity.this, gso);
@@ -55,6 +57,14 @@ public class ChatsActivity extends AppCompatActivity {
                 signOut();
             }
         });
+
+        addChatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChatsActivity.this, MainActivityAddChat.class);
+                startActivity(intent);
+            }
+        });
     }
 
     void signOut(){
@@ -66,4 +76,8 @@ public class ChatsActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
 }
