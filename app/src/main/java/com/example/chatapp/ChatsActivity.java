@@ -1,16 +1,22 @@
 package com.example.chatapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -19,6 +25,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ChatsActivity extends AppCompatActivity {
 
@@ -27,7 +38,10 @@ public class ChatsActivity extends AppCompatActivity {
     ImageButton signOutBtn;
     ImageButton addChatBtn;
 
-
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+    private ImageView chatIcon;
+    private TextView textChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +50,44 @@ public class ChatsActivity extends AppCompatActivity {
 
         signOutBtn = findViewById(R.id.signout);
         addChatBtn = findViewById(R.id.addchat);
+        chatIcon = findViewById(R.id.imageView);
+        textChat = findViewById(R.id.textView2);
 
+        database = FirebaseDatabase.getInstance("https://chatapp-fa812-default-rtdb.europe-west1.firebasedatabase.app/");
+        myRef = database.getReference("chats");
+        myRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String key = snapshot.getKey();
+               String  value=snapshot.getValue().toString();
+                byte[] decodedString = Base64.decode(value, Base64.URL_SAFE);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+                chatIcon.setImageBitmap(decodedByte);
+                textChat.setText(key);
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(ChatsActivity.this, gso);
 
@@ -65,6 +116,9 @@ public class ChatsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
     }
 
     void signOut(){
