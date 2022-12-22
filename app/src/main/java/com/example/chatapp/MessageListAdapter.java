@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MessageListAdapter extends RecyclerView.Adapter{
 
@@ -87,7 +88,7 @@ public class MessageListAdapter extends RecyclerView.Adapter{
     public int getItemViewType(int position) {
         BaseMessage message = (BaseMessage) mMessageList.get(position);
 
-        if (message.sender==UserInfo.user_name) {
+        if (Objects.equals(message.sender, UserInfo.user_name)) {
             // If the current user is the sender of the message
             return VIEW_TYPE_MESSAGE_SENT;
         } else {
