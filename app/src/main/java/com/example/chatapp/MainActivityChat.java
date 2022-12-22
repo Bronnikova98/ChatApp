@@ -5,6 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +18,21 @@ public class MainActivityChat extends AppCompatActivity {
     private RecyclerView mMessageRecycler;
     private MessageListAdapter mMessageAdapter;
     private List<BaseMessage> mMessageList;
+    private ImageButton back_to_chats;
+    private ImageView icon_chat;
+    private TextView name_chat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_chat);
+        back_to_chats = findViewById(R.id.imageButtonBackChats);
+        icon_chat = findViewById(R.id.imageView2);
+        name_chat = findViewById(R.id.textView2);
+
+        icon_chat.setImageBitmap(UserInfo.chat.icon_chat);
+        name_chat.setText(UserInfo.chat.text_chat);
+
         UserInfo.user_name = "Вика";
         mMessageList = new ArrayList<BaseMessage>();
         BaseMessage m1 = new BaseMessage();
@@ -66,6 +81,13 @@ public class MainActivityChat extends AppCompatActivity {
         mMessageAdapter = new MessageListAdapter(this, mMessageList);
         mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
         mMessageRecycler.setAdapter(mMessageAdapter);
+
+        back_to_chats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 

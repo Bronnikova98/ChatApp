@@ -42,9 +42,6 @@ public class ChatsActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference myRef;
-    private ImageView chatIcon;
-    private TextView textChat;
-
 
     private RecyclerView mChatRecycler;
     private List<BaseChat> mChatList=new ArrayList<BaseChat>();
@@ -55,20 +52,13 @@ public class ChatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chats);
 
-
         signOutBtn = findViewById(R.id.signout);
         addChatBtn = findViewById(R.id.addchat);
-
-//        BaseChat c2 = new BaseChat();
-//        c2.text_chat = "Name_Chat";
-//        mChatList.add(c2);
-
 
         mChatRecycler = (RecyclerView) findViewById(R.id.recycler_gchat2);
         mChatsAdapter = new ChatsListAdapter(this, mChatList);
         mChatRecycler.setLayoutManager(new LinearLayoutManager(this));
         mChatRecycler.setAdapter(mChatsAdapter);
-
 
         database = FirebaseDatabase.getInstance("https://chatapp-fa812-default-rtdb.europe-west1.firebasedatabase.app/");
         myRef = database.getReference("chats");
@@ -80,17 +70,11 @@ public class ChatsActivity extends AppCompatActivity {
                 byte[] decodedString = Base64.decode(value, Base64.URL_SAFE);
                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-
                 BaseChat c1 = new BaseChat();
                 c1.icon_chat = decodedByte;
                 c1.text_chat = key;
                 mChatList.add(c1);
                 mChatsAdapter.notifyDataSetChanged();
-            // chatRefresh();
-
-
-
-
             }
 
             @Override
@@ -142,17 +126,32 @@ public class ChatsActivity extends AppCompatActivity {
             }
         });
 
-    //
+
+
+        mChatRecycler.addOnItemTouchListener(new RecyclerItemClickListener(this, mChatRecycler ,new RecyclerItemClickListener.OnItemClickListener() {
+            @Override public void onItemClick(View view, int position) {
+//                Toast toast = Toast.makeText(ChatsActivity.this, mChatList.get(position).text_chat, Toast.LENGTH_LONG);
+//                toast.setGravity(Gravity.CENTER, 0, 0);
+//                toast.show();
+
+                UserInfo.chat = mChatList.get(position);
+                Intent intent = new Intent(ChatsActivity.this, MainActivityChat.class);
+                startActivity(intent);
+            }
+
+            @Override public void onLongItemClick(View view, int position) {
+                // do whatever
+            }
+        }));
 
 
 
+
+
+
+    //onCreate
     }
 
-    void chatRefresh (){
-        mChatsAdapter = new ChatsListAdapter(this, mChatList);
-        mChatRecycler.setLayoutManager(new LinearLayoutManager(this));
-        mChatRecycler.setAdapter(mChatsAdapter);
-    }
     void signOut(){
         gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

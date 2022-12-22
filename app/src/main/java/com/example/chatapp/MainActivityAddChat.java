@@ -10,12 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
+
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -31,11 +32,13 @@ public class MainActivityAddChat extends AppCompatActivity {
     private DatabaseReference myRef;
     private ImageButton icon;
     private Bitmap bitmap;
+    private ImageButton back_to_chats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_add_chat);
+        back_to_chats = findViewById(R.id.backToChatsButton);
         icon = findViewById(R.id.imageViewIcon);
         database = FirebaseDatabase.getInstance("https://chatapp-fa812-default-rtdb.europe-west1.firebasedatabase.app/");
         myRef = database.getReference("chats");
@@ -52,6 +55,16 @@ public class MainActivityAddChat extends AppCompatActivity {
 
             }
         });
+
+        back_to_chats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
+
     }
 
     ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(  new ActivityResultContracts
