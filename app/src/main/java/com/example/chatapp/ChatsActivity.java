@@ -3,17 +3,16 @@ package com.example.chatapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,6 +30,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChatsActivity extends AppCompatActivity {
 
     GoogleSignInOptions gso;
@@ -43,15 +45,30 @@ public class ChatsActivity extends AppCompatActivity {
     private ImageView chatIcon;
     private TextView textChat;
 
+
+    private RecyclerView mChatRecycler;
+    private List<BaseChat> mChatList=new ArrayList<BaseChat>();
+    private ChatsListAdapter mChatsAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chats);
 
+
         signOutBtn = findViewById(R.id.signout);
         addChatBtn = findViewById(R.id.addchat);
-        chatIcon = findViewById(R.id.imageView);
-        textChat = findViewById(R.id.textView2);
+
+//        BaseChat c2 = new BaseChat();
+//        c2.text_chat = "Name_Chat";
+//        mChatList.add(c2);
+
+
+        mChatRecycler = (RecyclerView) findViewById(R.id.recycler_gchat2);
+        mChatsAdapter = new ChatsListAdapter(this, mChatList);
+        mChatRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mChatRecycler.setAdapter(mChatsAdapter);
+
 
         database = FirebaseDatabase.getInstance("https://chatapp-fa812-default-rtdb.europe-west1.firebasedatabase.app/");
         myRef = database.getReference("chats");
@@ -63,8 +80,16 @@ public class ChatsActivity extends AppCompatActivity {
                 byte[] decodedString = Base64.decode(value, Base64.URL_SAFE);
                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-                chatIcon.setImageBitmap(decodedByte);
-                textChat.setText(key);
+
+                BaseChat c1 = new BaseChat();
+                c1.icon_chat = decodedByte;
+                c1.text_chat = key;
+                mChatList.add(c1);
+                mChatsAdapter.notifyDataSetChanged();
+            // chatRefresh();
+
+
+
 
             }
 
@@ -117,10 +142,17 @@ public class ChatsActivity extends AppCompatActivity {
             }
         });
 
+    //
+
 
 
     }
 
+    void chatRefresh (){
+        mChatsAdapter = new ChatsListAdapter(this, mChatList);
+        mChatRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mChatRecycler.setAdapter(mChatsAdapter);
+    }
     void signOut(){
         gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

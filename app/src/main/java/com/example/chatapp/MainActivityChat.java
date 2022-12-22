@@ -41,7 +41,7 @@ public class MainActivityChat extends AppCompatActivity {
         BaseMessage m5 = new BaseMessage();
         m5.message = "Сообщение";
         m5.sender = "Олег";
-        for(int i=0;i<100;i++){
+        for(int i=0;i<10;i++){
             mMessageList.add(m1);
         }
         mMessageList.add(m5);

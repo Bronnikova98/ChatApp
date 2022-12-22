@@ -26,7 +26,7 @@
             android:weightSum="12">
 
             <TextView
-                android:id="@+id/textViewChats"
+                android:id="@+id/textViewChat"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="40dp"
@@ -62,55 +62,25 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/scrollView4"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_gchat2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="2"
-                android:orientation="horizontal">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="220dp"
-                    android:layout_height="88dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="26dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="26dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    app:shapeAppearanceOverlay="@style/Circular"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:text="Имя чата"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="98dp"
         android:orientation="horizontal"
