@@ -23,24 +23,22 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewChats"
-                android:layout_width="220dp"
+                android:layout_width="88dp"
                 android:layout_height="88dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="26dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="26dp"
                 android:layout_marginBottom="10dp"
-                android:layout_weight="1"
                 android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/Circular"
                 app:srcCompat="@drawable/cat_icon_138789" />
 
             <TextView
                 android:id="@+id/textViewNameChats"
-                android:layout_width="match_parent"
-                android:layout_height="21dp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:text="Имя чата"
                 android:textSize="20sp" />
         </LinearLayout>

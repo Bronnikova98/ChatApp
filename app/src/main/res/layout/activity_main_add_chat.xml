@@ -43,6 +43,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scrollView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,16 +95,6 @@
                 android:inputType="textPersonName"
                 android:text="Name" />
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="Чат с таким именем уже существует"
-                android:textColor="#FF0000"
-                android:textSize="16sp" />
-
         </LinearLayout>
     </ScrollView>
 
@@ -111,18 +102,16 @@
         android:id="@+id/button3"
         android:layout_width="300dp"
         android:layout_height="48dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginTop="40dp"
         android:background="#7FD1C7"
         android:drawableLeft="@color/black"
         android:onClick="test"
         android:text="Создать новый чат"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView4" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

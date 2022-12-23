@@ -44,12 +44,14 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:text="Имя чата" />
+                android:text="Имя чата"
+                android:textColor="#FFFFFF"
+                android:textSize="34sp" />
         </LinearLayout>
 
     </LinearLayout>

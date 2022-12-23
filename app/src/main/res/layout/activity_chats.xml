@@ -37,17 +37,6 @@
                 android:textSize="34sp" />
 
             <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center|clip_vertical"
-                android:layout_weight="1"
-                android:background="#7FD2C8"
-                android:contentDescription="@string/app_name"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/searchmess" />
-
-            <ImageButton
                 android:id="@+id/addchat"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
