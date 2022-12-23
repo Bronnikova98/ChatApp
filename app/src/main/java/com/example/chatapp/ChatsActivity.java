@@ -46,6 +46,7 @@ public class ChatsActivity extends AppCompatActivity {
     private RecyclerView mChatRecycler;
     private List<BaseChat> mChatList=new ArrayList<BaseChat>();
     private ChatsListAdapter mChatsAdapter;
+    private ImageButton btn_inform;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class ChatsActivity extends AppCompatActivity {
 
         signOutBtn = findViewById(R.id.signout);
         addChatBtn = findViewById(R.id.addchat);
+        btn_inform = findViewById(R.id.imageButton4);
 
         mChatRecycler = (RecyclerView) findViewById(R.id.recycler_gchat2);
         mChatsAdapter = new ChatsListAdapter(this, mChatList);
@@ -126,6 +128,14 @@ public class ChatsActivity extends AppCompatActivity {
             }
         });
 
+        btn_inform.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChatsActivity.this, InfoActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         mChatRecycler.addOnItemTouchListener(new RecyclerItemClickListener(this, mChatRecycler ,new RecyclerItemClickListener.OnItemClickListener() {
@@ -146,11 +156,10 @@ public class ChatsActivity extends AppCompatActivity {
 
 
 
-
-
-
     //onCreate
     }
+
+
 
     void signOut(){
         gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -3,9 +3,16 @@ package com.example.chatapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -28,6 +35,7 @@ import java.util.UUID;
 
 
 public class MainActivityChat extends AppCompatActivity {
+
     private RecyclerView mMessageRecycler;
     private MessageListAdapter mMessageAdapter;
     private List<BaseMessage> mMessageList=new ArrayList<BaseMessage>();
@@ -40,10 +48,21 @@ public class MainActivityChat extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference myRef;
 
+    //
+    private static final int NOTIFY_ID = 100;
+    private NotificationManager notificationManager;
+    private static String CHANNEL_ID = "Message channel";
+    //
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_chat);
+
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID,"Main chanel", notificationManager.IMPORTANCE_DEFAULT);
+        notificationManager.createNotificationChannel(channel);
+
         back_to_chats = findViewById(R.id.imageButtonBackChats);
         icon_chat = findViewById(R.id.imageView2);
         name_chat = findViewById(R.id.textView2);
@@ -73,14 +92,44 @@ public class MainActivityChat extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
 
-                    BaseMessage message =new BaseMessage();
-                    message.message= snapshot.child("message").getValue().toString();
+                    BaseMessage message = new BaseMessage();
+                    message.message = snapshot.child("message").getValue().toString();
                     message.sender = snapshot.child("sender").getValue().toString();
                     message.chat = snapshot.child("chat").getValue().toString();
                     mMessageList.add(message);
                     mMessageAdapter.notifyDataSetChanged();
 
-                //добавить пуш уведомления без сортировки, snapshot.child("message") добавлялось не в лист, а текст пуша (создать класс выше)
+                //добавить пуш уведомления без сортировки
+
+                Intent notificationIntent = new Intent(MainActivityChat.this,MainActivityChat.class);
+                PendingIntent contentIntent = PendingIntent.getActivity(MainActivityChat.this, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
+
+                NotificationCompat.MessagingStyle messagingStyle = new NotificationCompat.MessagingStyle
+                        (UserInfo.chat.text_chat)
+                        .setConversationTitle("Android chat")
+                        .addMessage(snapshot.child("message").getValue().toString(), System.currentTimeMillis(), UserInfo.user_name)
+                        ;
+
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivityChat.this, CHANNEL_ID)
+                        .setSmallIcon(R.drawable.kolokol)
+                        .setLargeIcon(UserInfo.chat.icon_chat)
+
+                        .setChannelId(CHANNEL_ID)
+
+                        .setContentIntent(contentIntent)
+                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .addAction(R.drawable.ic_baseline_chat_24, "Открыть чат",
+                                contentIntent)
+                        .setStyle(messagingStyle)
+                        .setAutoCancel(true); // автоматически закрыть уведомление после нажатия;
+
+                Notification notification = builder.build();
+                notification.defaults = Notification.DEFAULT_ALL;
+                notificationManager.notify(NOTIFY_ID, builder.build());
+
+
+
+//
 
 
 
@@ -119,6 +168,7 @@ public class MainActivityChat extends AppCompatActivity {
             }
         });
     }
+
 
 
 }
