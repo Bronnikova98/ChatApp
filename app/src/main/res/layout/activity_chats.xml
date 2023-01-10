@@ -34,7 +34,7 @@
                 android:gravity="center_vertical"
                 android:text="Чаты"
                 android:textColor="#FFFFFF"
-                android:textSize="34sp" />
+                android:textSize="24sp" />
 
             <ImageButton
                 android:id="@+id/addchat"

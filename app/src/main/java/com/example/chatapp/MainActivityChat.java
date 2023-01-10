@@ -101,31 +101,31 @@ public class MainActivityChat extends AppCompatActivity {
 
                 //добавить пуш уведомления без сортировки
 
-                Intent notificationIntent = new Intent(MainActivityChat.this,MainActivityChat.class);
-                PendingIntent contentIntent = PendingIntent.getActivity(MainActivityChat.this, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
-
-                NotificationCompat.MessagingStyle messagingStyle = new NotificationCompat.MessagingStyle
-                        (UserInfo.chat.text_chat)
-                        .setConversationTitle("Android chat")
-                        .addMessage(snapshot.child("message").getValue().toString(), System.currentTimeMillis(), UserInfo.user_name)
-                        ;
-
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivityChat.this, CHANNEL_ID)
-                        .setSmallIcon(R.drawable.kolokol)
-                        .setLargeIcon(UserInfo.chat.icon_chat)
-
-                        .setChannelId(CHANNEL_ID)
-
-                        .setContentIntent(contentIntent)
-                        .setPriority(NotificationCompat.PRIORITY_HIGH)
-                        .addAction(R.drawable.ic_baseline_chat_24, "Открыть чат",
-                                contentIntent)
-                        .setStyle(messagingStyle)
-                        .setAutoCancel(true); // автоматически закрыть уведомление после нажатия;
-
-                Notification notification = builder.build();
-                notification.defaults = Notification.DEFAULT_ALL;
-                notificationManager.notify(NOTIFY_ID, builder.build());
+//                Intent notificationIntent = new Intent(MainActivityChat.this,MainActivityChat.class);
+//                PendingIntent contentIntent = PendingIntent.getActivity(MainActivityChat.this, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
+//
+//                NotificationCompat.MessagingStyle messagingStyle = new NotificationCompat.MessagingStyle
+//                        (UserInfo.chat.text_chat)
+//                        .setConversationTitle("Android chat")
+//                        .addMessage(snapshot.child("message").getValue().toString(), System.currentTimeMillis(), UserInfo.user_name)
+//                        ;
+//
+//                NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivityChat.this, CHANNEL_ID)
+//                        .setSmallIcon(R.drawable.kolokol)
+//                        .setLargeIcon(UserInfo.chat.icon_chat)
+//
+//                        .setChannelId(CHANNEL_ID)
+//
+//                        .setContentIntent(contentIntent)
+//                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+//                        .addAction(R.drawable.ic_baseline_chat_24, "Открыть чат",
+//                                contentIntent)
+//                        .setStyle(messagingStyle)
+//                        .setAutoCancel(true); // автоматически закрыть уведомление после нажатия;
+//
+//                Notification notification = builder.build();
+//                notification.defaults = Notification.DEFAULT_ALL;
+//                notificationManager.notify(NOTIFY_ID, builder.build());
 
 
 

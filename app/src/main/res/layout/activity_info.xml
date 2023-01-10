@@ -23,12 +23,14 @@
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
             android:background="#7FD3C9"
             android:contentDescription="@string/app_name"
             android:paddingTop="24dp"
             android:paddingBottom="24dp"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/symbolback" />
 
         <TextView
@@ -38,7 +40,7 @@
             android:gravity="center_vertical"
             android:text="О приложении"
             android:textColor="#FFFFFF"
-            android:textSize="34sp" />
+            android:textSize="24sp" />
 
     </LinearLayout>
 

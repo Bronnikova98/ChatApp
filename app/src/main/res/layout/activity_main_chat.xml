@@ -25,12 +25,14 @@
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
                 android:background="#7FD3C9"
                 android:contentDescription="@string/app_name"
                 android:paddingTop="24dp"
                 android:paddingBottom="24dp"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 app:srcCompat="@drawable/symbolback" />
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -44,14 +46,14 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
-                android:layout_weight="1"
+                android:layout_marginRight="20dp"
                 android:text="Имя чата"
                 android:textColor="#FFFFFF"
-                android:textSize="34sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -68,9 +70,10 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
         android:orientation="horizontal"
-        android:weightSum="8"
-        android:layout_alignParentBottom ="true">
+        android:weightSum="8">
 
         <EditText
             android:id="@+id/editTextTextPersonName"
@@ -80,13 +83,14 @@
             android:layout_marginRight="10dp"
             android:layout_weight="7"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Message" />
+            android:hint="Сообщение"
+            android:inputType="textPersonName" />
 
         <ImageButton
             android:id="@+id/imageButton3"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:background="#FFFFFF"
@@ -95,7 +99,7 @@
             android:paddingTop="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/arrow1" />
     </LinearLayout>
 
